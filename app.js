@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config()
 const app = express();
 const bodyParser = require('body-parser');
 const https = require('https');
@@ -12,12 +13,12 @@ app.get('/', (req, res)=>{
 
 app.post('/', (req, res)=>{
     console.log(req.body);
-    const mailChimpApiKey = '60f425f1f6f54329e946074bbde72c8c-us17';
-    const list_Id = '0e44f27da3';
+    const mailChimpApiKey = process.env.MAIL_CHIMP_ID;
+    const list_Id = process.env.LIST_ID;
     const fname = req.body.fname;
     const lname = req.body.lname;
     const email = req.body.email;
-    const url = 'https://us17.api.mailchimp.com/3.0/lists/';
+    const url = process.env.MAIL_CHIMP_API;
 
     const data = {
         members: [
